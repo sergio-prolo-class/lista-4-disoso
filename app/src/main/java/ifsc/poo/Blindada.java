@@ -1,4 +1,6 @@
 package ifsc.poo;
 
-public class Blindada {
+public interface Blindada {
+    String ativarBlindagem();
+    String desativarBlindagem();
 }

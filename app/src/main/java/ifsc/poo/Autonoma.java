@@ -1,4 +1,5 @@
 package ifsc.poo;
 
-public class Autonoma {
+public interface Autonoma {
+    String ativarControleAutomatico();
 }

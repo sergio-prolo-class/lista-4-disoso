@@ -1,4 +1,5 @@
 package ifsc.poo;
 
-public class Tripulada {
+public interface Tripulada {
+    String controlarManual();
 }

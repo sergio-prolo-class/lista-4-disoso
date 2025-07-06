@@ -1,7 +1,6 @@
-build.gradle
-
 plugins {
     id 'java'
+    id 'application'
 }
 
 repositories {
@@ -9,22 +8,15 @@ repositories {
 }
 
 dependencies {
-    implementation files('lib/algs4.jar')
+    implementation files('libs/algs4.jar')
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
+application {
+    mainClass = 'ifsc.poo.App'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'App'
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        attributes 'Main-Class': 'ifsc.poo.App'
     }
 }
