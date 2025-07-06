@@ -8,15 +8,27 @@ repositories {
 }
 
 dependencies {
-    implementation files('libs/algs4.jar')
+    implementation files('libs/algs4.jar') // Ou use a linha abaixo
+    // implementation 'edu.princeton.cs:algs4:1.0.4'
 }
 
 application {
     mainClass = 'ifsc.poo.App'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['app/src/main/java']
+        }
+    }
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'ifsc.poo.App'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

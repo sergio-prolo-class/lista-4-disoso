@@ -71,7 +71,9 @@ public abstract class NaveEspacial {
 
     protected String formatarMensagem(String formato, Object... args) {
         return String.format("%s(ID#%04d): " + formato,
-                getClass().getSimpleName(), id, args);
+                getClass().getSimpleName(),
+                id,
+                args);
     }
 
     // getters
