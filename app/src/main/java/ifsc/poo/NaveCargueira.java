@@ -1,3 +1,5 @@
+package ifsc.poo;
+
 public class NaveCargueira extends NaveEspacial implements Blindada {
     private final int capacidadeMaxima;
     private int cargaAtual;

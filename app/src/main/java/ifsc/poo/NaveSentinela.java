@@ -1,3 +1,5 @@
+package ifsc.poo;
+
 public class NaveSentinela extends NaveEspacial implements Autonoma {
     private boolean radarAtivo;
 

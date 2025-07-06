@@ -1,3 +1,5 @@
+package ifsc.poo;
+
 public class NaveMineradora extends NaveEspacial implements Tripulada {
     private final int energiaLaserMaxima;
     private int energiaLaserAtual;

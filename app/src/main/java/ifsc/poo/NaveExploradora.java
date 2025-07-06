@@ -1,3 +1,5 @@
+package ifsc.poo;
+
 public class NaveExploradora extends NaveEspacial implements Tripulada {
     private boolean holofotesLigados;
 
