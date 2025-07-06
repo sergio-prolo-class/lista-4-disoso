@@ -8,19 +8,11 @@ repositories {
 }
 
 dependencies {
-    implementation files('libs/algs4.jar')
+    implementation files('libs/algs4.jar') 
 }
 
 application {
     mainClass = 'ifsc.poo.App'
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ['app/src/main/java']
-        }
-    }
 }
 
 tasks.withType(JavaCompile) {
