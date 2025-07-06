@@ -8,8 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation files('libs/algs4.jar') // Ou use a linha abaixo
-    // implementation 'edu.princeton.cs:algs4:1.0.4'
+    implementation files('libs/algs4.jar')
 }
 
 application {
@@ -24,11 +23,6 @@ sourceSets {
     }
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'ifsc.poo.App'
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
