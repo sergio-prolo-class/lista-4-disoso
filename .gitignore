@@ -220,3 +220,7 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,visualstudiocode,gradle,macos
+
+*.class
+build/
+!libs/algs4.jar
