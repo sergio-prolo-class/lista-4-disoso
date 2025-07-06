@@ -1,12 +1,13 @@
 package ifsc.poo;
 
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import java.util.LinkedHashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class App {
     private Set<NaveEspacial> garagem = new LinkedHashSet<>();
+    private Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         App app = new App();
@@ -25,7 +26,11 @@ public class App {
         int opcao;
         do {
             exibirMenu();
-            opcao = StdIn.readInt();
+            while (!scanner.hasNextInt()) {
+                StdOut.println("Por favor, digite um número válido.");
+                scanner.next();
+            }
+            opcao = scanner.nextInt();
             processarOpcao(opcao);
         } while (opcao != 0);
     }
@@ -75,14 +80,12 @@ public class App {
     private void testarNave(NaveEspacial nave) {
         StdOut.println("\n" + nave.getClass().getSimpleName() + " (ID#" + String.format("%04d", nave.getId()) + ")");
 
-        // fazendo um teste basico de voo
         executarComando(nave::decolar);
         executarComando(() -> nave.acelerar(5));
         executarComando(() -> nave.acelerar(10));
         executarComando(() -> nave.frear(3));
         executarComando(nave::pousar);
 
-        // fazendo teste de interfaces
         if (nave instanceof Tripulada) {
             executarComando(((Tripulada) nave)::controlarManual);
         }
@@ -119,7 +122,7 @@ public class App {
 
     private void testarNaveExploradora(NaveExploradora nave) {
         executarComando(nave::ligarHolofotes);
-        executarComando(nave::pousar); // Deve desligar holofotes
+        executarComando(nave::pousar);
     }
 
     private void testarNaveCargueira(NaveCargueira nave) {
@@ -132,6 +135,6 @@ public class App {
         executarComando(nave::ativarControleAutomatico);
         executarComando(nave::ligarRadar);
         executarComando(() -> nave.acelerar((int)(nave.getVelocidadeMaxima() * 0.95)));
-        executarComando(nave::ligarRadar); // Deve falhar por alta velocidade
+        executarComando(nave::ligarRadar);
     }
 }
