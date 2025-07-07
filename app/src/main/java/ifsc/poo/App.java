@@ -82,14 +82,14 @@ public class App {
     private void testarNave(NaveEspacial nave) {
         StdOut.println("\n" + nave.getClass().getSimpleName() + " (ID#" + String.format("%04d", nave.getId()) + ")");
 
-        executarComando(nave::decolar);
-        executarComando(() -> nave.acelerar(5));
-        executarComando(() -> nave.acelerar(10));
-        executarComando(() -> nave.frear(3));
-        executarComando(nave::pousar);
+        executarComandoComRetorno(nave::decolar);
+        executarComandoComRetorno(() -> nave.acelerar(5));
+        executarComandoComRetorno(() -> nave.acelerar(10));
+        executarComandoComRetorno(() -> nave.frear(3));
+        executarComandoComRetorno(nave::pousar);
 
         if (nave instanceof Tripulada) {
-            executarComando(((Tripulada) nave)::controlarManual);
+            executarComandoComRetorno(((Tripulada) nave)::controlarManual);
         }
 
         if (nave instanceof NaveMineradora) {
@@ -109,35 +109,37 @@ public class App {
         }
     }
 
-    private void executarComando(java.util.function.Supplier<String> comando) {
+    private void executarComandoComRetorno(java.util.function.Supplier<String> comando) {
         try {
             String resultado = comando.get();
-            StdOut.println(resultado); // Mostra apenas o resultado
+            if (resultado != null && !resultado.isEmpty()) {
+                StdOut.println(resultado);
+            }
         } catch (Exception e) {
             StdOut.println("Erro ao executar comando: " + e.getMessage());
         }
     }
 
     private void testarNaveMineradora(NaveMineradora nave) {
-        executarComando(() -> nave.minerar(200));
-        executarComando(() -> nave.recarregarLaser(300));
+        executarComandoComRetorno(() -> nave.minerar(200));
+        executarComandoComRetorno(() -> nave.recarregarLaser(300));
     }
 
     private void testarNaveExploradora(NaveExploradora nave) {
-        executarComando(nave::ligarHolofotes);
-        executarComando(nave::pousar);
+        executarComandoComRetorno(nave::ligarHolofotes);
+        executarComandoComRetorno(nave::pousar);
     }
 
     private void testarNaveCargueira(NaveCargueira nave) {
-        executarComando(() -> nave.carregar(4000));
-        executarComando(nave::ativarBlindagem);
-        executarComando(nave::desativarBlindagem);
+        executarComandoComRetorno(() -> nave.carregar(4000));
+        executarComandoComRetorno(nave::ativarBlindagem);
+        executarComandoComRetorno(nave::desativarBlindagem);
     }
 
     private void testarNaveSentinela(NaveSentinela nave) {
-        executarComando(nave::ativarControleAutomatico);
-        executarComando(nave::ligarRadar);
-        executarComando(() -> nave.acelerar((int)(nave.getVelocidadeMaxima() * 0.95)));
-        executarComando(nave::ligarRadar);
+        executarComandoComRetorno(nave::ativarControleAutomatico);
+        executarComandoComRetorno(nave::ligarRadar);
+        executarComandoComRetorno(() -> nave.acelerar((int)(nave.getVelocidadeMaxima() * 0.95)));
+        executarComandoComRetorno(nave::ligarRadar);
     }
 }

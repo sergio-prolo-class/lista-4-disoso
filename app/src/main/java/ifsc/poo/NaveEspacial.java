@@ -70,10 +70,11 @@ public abstract class NaveEspacial {
     }
 
     protected String formatarMensagem(String formato, Object... args) {
-        return String.format("%s(ID#%04d): " + formato,
-                getClass().getSimpleName(),
-                id,
-                args);
+        Object[] novosArgs = new Object[2 + args.length];
+        novosArgs[0] = getClass().getSimpleName();
+        novosArgs[1] = id;
+        System.arraycopy(args, 0, novosArgs, 2, args.length);
+        return String.format("%s(ID#%04d): " + formato, novosArgs);
     }
 
     // getters
