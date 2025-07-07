@@ -23,16 +23,18 @@ public class App {
     }
 
     private void executarMenu() {
-        int opcao;
+        int opcao = -1;
         do {
             exibirMenu();
-            while (!scanner.hasNextInt()) {
-                StdOut.println("Por favor, digite um número válido.");
+            if (scanner.hasNextInt()) {
+                opcao = scanner.nextInt();
+                processarOpcao(opcao);
+            } else {
                 scanner.next();
+                StdOut.println("Por favor, digite um número válido (0, 1 ou 2).");
             }
-            opcao = scanner.nextInt();
-            processarOpcao(opcao);
         } while (opcao != 0);
+        scanner.close();
     }
 
     private void exibirMenu() {
@@ -107,9 +109,10 @@ public class App {
         }
     }
 
-    private void executarComando(Runnable comando) {
+    private void executarComando(java.util.function.Supplier<String> comando) {
         try {
-            StdOut.println(comando.toString().split("::")[1] + ": " + ((java.util.function.Supplier<String>) comando).get());
+            String resultado = comando.get();
+            StdOut.println(resultado); // Mostra apenas o resultado
         } catch (Exception e) {
             StdOut.println("Erro ao executar comando: " + e.getMessage());
         }
