@@ -35,3 +35,10 @@ run {
     standardInput = System.in
     systemProperty "file.encoding", "UTF-8"
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
